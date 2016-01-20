@@ -1,0 +1,13 @@
+{
+  "name": "AngularTask3",
+  "description": "AngularJS project. Task 3",
+  "version": "0.0.1",
+  "homepage": "https://epam.com",
+  "dependencies": {
+    "angular": "1.4.x",
+    "bootstrap": "~3.1.1",
+    "angular-ui-router": "0.2.15",
+    "angular-translate": "~2.8.1",
+    "angular-translate-loader-static-files": "~2.8.1"
+  }
+}

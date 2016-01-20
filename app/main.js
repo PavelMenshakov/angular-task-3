@@ -15,4 +15,12 @@ var app = angular.module('ajsApp',[
         suffix: '.json'
     });
     $translateProvider.preferredLanguage('en');
+}])
+    .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push([
+        '$injector',
+        function ($injector) {
+            return $injector.get('AuthInterceptor');
+        }
+    ]);
 }]);

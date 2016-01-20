@@ -13,7 +13,7 @@ angular.module('ajsApp.services',[])
                 if(users[user.username]){
                     var loginData = users[user.username];
                     //insert your custom login function here
-                    if(user.username == loginData.username && user.password == loginData.username){
+                    if(user.username === loginData.username && user.password === loginData.username){
                         //set the browser session, to avoid relogin on refresh
                         $window.sessionStorage["userInfo"] = JSON.stringify(loginData);
 

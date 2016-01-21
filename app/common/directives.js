@@ -12,7 +12,7 @@ app.directive('userName', function () {		//create directive for user name valida
         require:'ngModel',
         link:function (scope, elm, attrs, ngModelCtrl) {
 
-            ngModelCtrl.$validators['userName'] =  function(modelValue, viewValue) {
+            ngModelCtrl.$validators.userName =  function(modelValue, viewValue) {
                 return ngModelCtrl.$isEmpty(viewValue) || isValid(viewValue);
             };
 
@@ -25,7 +25,7 @@ app.directive('ageValidation', function () {   //create directive for age valida
         require:'ngModel',
         link:function (scope, elm, attrs, ngModelCtrl) {
 
-            ngModelCtrl.$validators['ageValidation'] =  function(modelValue, viewValue) {
+            ngModelCtrl.$validators.ageValidation =  function(modelValue, viewValue) {
                 return ngModelCtrl.$isEmpty(modelValue) || (modelValue > 18 && modelValue < 65);
             };
         }
@@ -42,7 +42,7 @@ app.directive('dateValidation', function () {   //create directive for date vali
         require:'ngModel',
         link:function (scope, elm, attrs, ngModelCtrl) {
 
-            ngModelCtrl.$validators['dateValidation'] =  function(modelValue, viewValue) {
+            ngModelCtrl.$validators.dateValidation =  function(modelValue, viewValue) {
                 return ngModelCtrl.$isEmpty(modelValue) || isValid(modelValue);
             };
         }
@@ -58,7 +58,7 @@ app.directive('emailValidation', function() {  // email validation
         require:'ngModel',
         link:function (scope, elm, attrs, ngModelCtrl) {
 
-            ngModelCtrl.$validators['emailValidation'] =  function(modelValue, viewValue) {
+            ngModelCtrl.$validators.emailValidation =  function(modelValue, viewValue) {
                 return ngModelCtrl.$isEmpty(modelValue) || isValid(modelValue);
             };
         }

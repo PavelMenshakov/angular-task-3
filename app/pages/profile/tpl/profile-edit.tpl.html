@@ -1,5 +1,5 @@
 <form name="userForm" class="form-group" novalidate>
-    <div translate="NAME_TEXT"></div> <input user-name name="name" class="form-control" type="text" ng-model="user.name" ng-model-options="{ updateOn: 'blur' }" required /><br />
+    <div translate="NAME_TEXT"></div> <input name="name" class="form-control" type="text" ng-model="user.name" ng-model-options="{ updateOn: 'blur' }" required /><br />
 				<span class="alert-danger" ng-show="userForm.name.$dirty && userForm.name.$invalid">
 					<span> User name must be more than 3 symbols,<br />only first letter in uppercase of the word,<br />only letters.</span>
 				</span><br />

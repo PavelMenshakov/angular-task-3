@@ -19,5 +19,12 @@
   "RESET_TEXT": "Reset",
   "FORGOT_TEXT": "Forgot password",
   "CANCEL_TEXT": "Cancel",
-  "REMIND_TEXT": "Remind"
+  "REMIND_TEXT": "Remind",
+  "ACCESS_DECLINE_TEXT": "Access decline!!!",
+  "ACCESS_RECOMENDATION_TEXT": "You need to login",
+  "OK_TEXT": "Ok",
+  "LOGOUT_MESSAGE_TEXT": "Goodbye",
+  "LOGOUT_TEXT": "Logout",
+  "SESSION_MESSAGE_TEXT": "Session is over",
+  "SESSION_TEXT": "Session"
 }

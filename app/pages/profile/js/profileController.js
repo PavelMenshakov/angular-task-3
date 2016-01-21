@@ -1,18 +1,22 @@
 "use strict";
 
-var app = angular.module('ajsApp.profile',[])
-    .controller('profileCtrl', ['$scope', function($scope) {
-        $scope.master = {};		//master model in scope
-        $scope.masterFields = []; //array of master model fields
+var app = angular.module('ajsApp.profile',['ajsApp.services'])
+    .controller('profileCtrl', ['$rootScope','$scope', 'Authorization','$state', '$window', function($rootScope, $scope, Authorization, $state, $window) {
+
+
+        $scope.user = JSON.parse($window.localStorage.userInfo);
 
         $scope.update = function(user) { //form update method
-            $scope.master = angular.copy(user);
+            $window.localStorage.userInfo = JSON.stringify(user);
         };
 
         $scope.reset = function() {
             $scope.user = {};
         };
 
-        $scope.reset();
+        if(!Authorization.isAccepted()){
+            $state.go('navigation.home');
+            $rootScope.$broadcast('accessDecline');
+        }
 }]);
 

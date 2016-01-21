@@ -11,8 +11,7 @@ angular.module('ajsApp.routing', ['ui.router'])
         controller: 'navigationCtrl'
     }).state('navigation.home', {
         url: '/home',
-        templateUrl: 'app/pages/home/tpl/home.tpl.html',
-        controller: 'homeCtrl'
+        templateUrl: 'app/pages/home/tpl/home.tpl.html'
     }).state('navigation.login', {
         url: '/login',
         templateUrl: 'app/pages/login/tpl/login.tpl.html',
@@ -26,15 +25,11 @@ angular.module('ajsApp.routing', ['ui.router'])
         controller: 'profileCtrl'
     }).state('navigation.profile.view', {
         url: '/view',
-        templateUrl: 'app/pages/profile/tpl/profile-view.tpl.html',
-        controller: function($scope) {
-            $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
-        }
+        parent: 'navigation.profile',
+        templateUrl: 'app/pages/profile/tpl/profile-view.tpl.html'
     }).state('navigation.profile.edit', {
         url: '/edit',
-        templateUrl: 'app/pages/profile/tpl/profile-edit.tpl.html',
-        controller: function($scope) {
-            $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
-        }
+        parent: 'navigation.profile',
+        templateUrl: 'app/pages/profile/tpl/profile-edit.tpl.html'
     });
 });

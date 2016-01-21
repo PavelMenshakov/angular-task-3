@@ -1,69 +1,48 @@
 "use strict";
 
-angular.module('ajsApp.services',[])
-    .factory('Authorization', [ '$http', '$rootScope', '$window', 'Session', 'AUTH_EVENTS',
-        function($http, $rootScope, $window, Session, AUTH_EVENTS) {
-            var authorizationService = {};
+angular.module('ajsApp.services',[
+    'angular-md5'
+]).factory('Authorization', [ '$http', '$rootScope', '$window', 'md5',
+        function($http, $rootScope, $window, md5) {
+            var authServ = {};
 
-            authorizationService.login = function(user, success, error) {
-                //$http.post('users.json').success(function(data) {
-                var data = usersJson;
+            var getUsers = function(){
+                var path = 'data/users.json';
+                var users = $http.get(path).then(function (resp) {
+                    return resp.data;
+                });
+                return users;
+            },
+                isDataCorrect = function(password, userData){
+                    return userData && userData.pass === md5.createHash(password);
+                };
 
-                var users = data.users;
-                if(users[user.username]){
-                    var loginData = users[user.username];
-                    //insert your custom login function here
-                    if(user.username === loginData.username && user.password === loginData.username){
-                        //set the browser session, to avoid relogin on refresh
-                        $window.sessionStorage["userInfo"] = JSON.stringify(loginData);
-
-                        //delete password not to be seen clientside
-                        delete loginData.password;
-
-                        //update current user into the Session service or $rootScope.currentUser
-                        //whatever you prefer
-                        Session.create(loginData);
-                        //or
-                        $rootScope.currentUser = loginData;
-
-                        //fire event of successful login
-                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                        //run success function
-                        success(loginData);
-                    } else{
-                        //OR ELSE
-                        //unsuccessful login, fire login failed event for
-                        //the according functions to run
-                        $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                        error();
+            authServ.login = function(user) {
+                var users = getUsers();
+                users.then(function(users){
+                    if(users[user.login]){
+                        var userInfo = users[user.login];
+                        if(isDataCorrect(user.password, userInfo)){
+                            delete userInfo.pass;
+                            $window.localStorage.userInfo = JSON.stringify(userInfo);
+                            $rootScope.currentUser = userInfo;
+                            $rootScope.$broadcast('userAccepted');
+                        } else{
+                            $rootScope.$broadcast('userDecline');
+                        }
                     }
-                }
-
+                });
             };
 
-            //check if the user is authenticated
-            authorizationService.isAuthenticated = function() {
-                return !!Session.user;
+            authServ.isAccepted = function() {
+                return !!$window.localStorage.userInfo;
             };
 
-            //check if the user is authorized to access the next route
-            //this function can be also used on element level
-            //e.g. <p ng-if="isAuthorized(authorizedRoles)">show this only to admins</p>
-            authorizationService.isAuthorized = function(authorizedRoles) {
-                if (!angular.isArray(authorizedRoles)) {
-                    authorizedRoles = [authorizedRoles];
-                }
-                return (authService.isAuthenticated() &&
-                authorizedRoles.indexOf(Session.userRole) !== -1);
+            authServ.logout = function(){
+                $window.localStorage.removeItem("userInfo");
+                $rootScope.$broadcast('userLogout');
             };
 
-            //log out the user and broadcast the logoutSuccess event
-            authorizationService.logout = function(){
-                Session.destroy();
-                $window.sessionStorage.removeItem("userInfo");
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            }
-
-            return authorizationService;
+            return authServ;
         }]);
 

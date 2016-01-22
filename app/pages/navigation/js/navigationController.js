@@ -2,8 +2,8 @@
 
 angular.module('ajsApp.navigation', [
     'ajsApp.modal'
-]).controller('navigationCtrl', ['$rootScope', '$scope', '$translate', '$uibModal', 'Authorization', '$state','$http', '$timeout',
-    function($rootScope, $scope, $translate, $uibModal, Authorization, $state, $http, $timeout) {
+]).controller('navigationCtrl', ['$scope', '$translate', '$uibModal', 'Authorization', '$state','$http', '$timeout',
+    function($scope, $translate, $uibModal, Authorization, $state, $http, $timeout) {
         var sessionTrack;
         $scope.changeLang = function (lang) {
             $translate.use(lang);
@@ -24,12 +24,12 @@ angular.module('ajsApp.navigation', [
             Authorization.logout();
         };
 
-        $rootScope.$on('userAccepted', function () {
+        $scope.$on('userAccepted', function () {
             $state.go('navigation.profile.view');
         });
 
 
-        $rootScope.$on('userLogout', function () {
+        $scope.$on('userLogout', function () {
             var logoutModal = $uibModal.open({
                 templateUrl: 'app/common/modal/tpl/modal-logout.tpl.html',
                 controller: 'modalCtrl',
@@ -38,7 +38,7 @@ angular.module('ajsApp.navigation', [
             $state.go('navigation.home');
         });
 
-        $rootScope.$on('accessDecline', function () {
+        $scope.$on('accessDecline', function () {
             var errorModal = $uibModal.open({
                 templateUrl: 'app/common/modal/tpl/modal-error.tpl.html',
                 controller: 'modalCtrl',
@@ -46,7 +46,7 @@ angular.module('ajsApp.navigation', [
             });
         });
 
-        $rootScope.$on('$stateChangeSuccess', function () {
+        $scope.$on('$stateChangeSuccess', function () {
             if (sessionTrack) {
                 $timeout.cancel(sessionTrack);
             }
@@ -54,7 +54,7 @@ angular.module('ajsApp.navigation', [
                 if ($scope.isAutorised()) {
                     $scope.logout();
                 }
-            }, 10000);
+            }, 20000);
         });
     }
 ]);

@@ -33,7 +33,7 @@ app.directive('ageValidation', function () {   //create directive for age valida
 });
 
 app.directive('dateValidation', function () {   //create directive for date validation
-    var DATE_REGEXP = new RegExp('[1-9]{2,4}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}'),
+    var DATE_REGEXP = new RegExp('[0-9]{2,4}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}'),
         isValid = function(s) {
             return (DATE_REGEXP.test(s));
         };

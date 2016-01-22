@@ -26,5 +26,6 @@
   "LOGOUT_MESSAGE_TEXT": "Досвидания",
   "LOGOUT_TEXT": "Выход",
   "SESSION_MESSAGE_TEXT": "Сессия закончена",
-  "SESSION_TEXT": "Сессия"
+  "SESSION_TEXT": "Сессия",
+  "LOAD_TEXT": "Загрузка..."
 }

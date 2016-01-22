@@ -26,5 +26,6 @@
   "LOGOUT_MESSAGE_TEXT": "Goodbye",
   "LOGOUT_TEXT": "Logout",
   "SESSION_MESSAGE_TEXT": "Session is over",
-  "SESSION_TEXT": "Session"
+  "SESSION_TEXT": "Session",
+  "LOAD_TEXT": "Loading..."
 }
